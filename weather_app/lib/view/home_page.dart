@@ -5,6 +5,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/constants/api_key.dart' as k;
 
+import '../utils/container_box_widget.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,15 +22,9 @@ class _HomePageState extends State<HomePage> {
   num? hum;
   num? cover;
   String cityname = '';
-  @override
-  void initState() {
-    getCurrentLocation();
-    super.initState();
-  }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     controller.dispose();
     super.dispose();
   }
@@ -129,173 +125,26 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade900,
-                      offset: const Offset(1, 2),
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                    )
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image(
-                      image: const NetworkImage(
-                          'https://rukminim1.flixcart.com/image/850/1000/k7285u80/digital-thermometer/y/e/t/thermocare-room-temperature-for-wall-mounting-yellow-thermometer-original-imafpe532fhgqq2y.jpeg?q=90'),
-                      fit: BoxFit.fitHeight,
-                      width: MediaQuery.of(context).size.width * 0.09,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Temperature: ${temp?.toInt()} ºC',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade900,
-                      offset: const Offset(1, 2),
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                    )
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image(
-                      image: const NetworkImage(
-                          'https://www.fluidpowerworld.com/wp-content/uploads/2015/06/Meg-pressure-gauge-drawing-image.jpg'),
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width * 0.09,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Pressure: ${press?.toInt()} hPa',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade900,
-                      offset: const Offset(1, 2),
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                    )
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image(
-                      image: const NetworkImage(
-                          'https://cdn-icons-png.flaticon.com/512/3262/3262966.png'),
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width * 0.09,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Humidity: ${hum?.toInt()} %',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.12,
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(15),
-                  ),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade900,
-                      offset: const Offset(1, 2),
-                      blurRadius: 3,
-                      spreadRadius: 1,
-                    )
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Image(
-                      image: const NetworkImage(
-                          'https://i.pinimg.com/564x/7b/e2/18/7be218a3cf1708c6c5f628daf83a4718.jpg'),
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width * 0.09,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'CloudCover: ${cover?.toInt()} %',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w600),
-                    )
-                  ],
-                ),
+              ContainerBox(
+                  cover: cover,
+                  imageUrl:
+                      'https://rukminim1.flixcart.com/image/850/1000/k7285u80/digital-thermometer/y/e/t/thermocare-room-temperature-for-wall-mounting-yellow-thermometer-original-imafpe532fhgqq2y.jpeg?q=90',
+                  text: 'Temperature: ${temp?.toInt()} ºC'),
+              ContainerBox(
+                  cover: cover,
+                  imageUrl:
+                      'https://www.fluidpowerworld.com/wp-content/uploads/2015/06/Meg-pressure-gauge-drawing-image.jpg',
+                  text: 'Pressure: ${press?.toInt()} hPa'),
+              ContainerBox(
+                  cover: cover,
+                  imageUrl:
+                      'https://cdn-icons-png.flaticon.com/512/3262/3262966.png',
+                  text: 'Humidity: ${hum?.toInt()} %'),
+              ContainerBox(
+                cover: cover,
+                imageUrl:
+                    'https://i.pinimg.com/564x/7b/e2/18/7be218a3cf1708c6c5f628daf83a4718.jpg',
+                text: 'CloudCover: ${cover?.toInt()} %',
               ),
             ],
           ),
@@ -331,13 +180,6 @@ class _HomePageState extends State<HomePage> {
       var data = response.body;
       var decodeData = json.decode(data);
       updateUI(decodeData);
-      setState(() {
-        isLoaded = true;
-      });
-
-      print(data);
-    } else {
-      print(response.statusCode);
     }
   }
 
@@ -351,24 +193,6 @@ class _HomePageState extends State<HomePage> {
       var data = response.body;
       var decodeData = json.decode(data);
       updateUI(decodeData);
-      setState(() {
-        isLoaded = true;
-      });
-      print(data);
-    } else {
-      print(response.statusCode);
-    }
-  }
-
-  getCurrentLocation() async {
-    var p = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.low,
-      forceAndroidLocationManager: true,
-    );
-    if (p != null) {
-      print('Lat:${p.latitude}, Long:${p.longitude}');
-    } else {
-      print('Data unavailable');
     }
   }
 }
